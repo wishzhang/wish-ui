@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>wish-ui</title>
+  </head>
+  <body>
+    <div id="app">
+      <input id="check" onchange="myChange(event)" type="checkbox" checked>aa
+    </div>
+
+    <script>
+      var checkEl=document.getElementById('check');
+      checkEl.style.background='red';
+      function myChange(e) {
+        console.dir(e);
+      }
+    </script>
+  </body>
+</html>

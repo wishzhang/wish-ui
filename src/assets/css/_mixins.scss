@@ -1,0 +1,33 @@
+@mixin ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin border(
+  $location:all,
+  $width:$app-bw,
+  $style:solid,
+  $color:$app-bc-level3) {
+
+  @if $location==top {
+    border-top: $width $style $color;
+  } @else if $location==left {
+    border-left: $width $style $color;
+  } @else if $location==right {
+    border-right: $width $style $color;
+  } @else if $location==bottom {
+    border-bottom: $width $style $color;
+  } @else if $location==none {
+    border: none;
+  } @else {
+    border: $width $style $color;
+  }
+}
+
+@mixin circle($radius){
+  width:2*$radius;
+  height:2*$radius;
+  border-radius: $radius;
+}
+
