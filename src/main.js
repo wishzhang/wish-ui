@@ -7,6 +7,8 @@ import TabPane from './components/tab-pane/index';
 import Tabs from './components/tabs/index';
 import Switch from './components/switch/index';
 import Select from './components/select/index';
+import RadioGroup from './components/radio-group/index';
+import Radio from './components/radio/index';
 
 const components = [
   Button,
@@ -16,7 +18,9 @@ const components = [
   TabPane,
   Tabs,
   Switch,
-  Select
+  Select,
+  RadioGroup,
+  Radio
 ];
 
 //若有Vue全局环境，则自动安装组件
@@ -39,5 +43,7 @@ export default {
   TabPane,
   Tabs,
   Switch,
-  Select
+  Select,
+  RadioGroup,
+  Radio
 };

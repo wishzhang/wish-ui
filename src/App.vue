@@ -39,6 +39,15 @@
       <app-select v-model="value" :placeholder="placeholder"></app-select>
     </div>
 
+    <!--单选-->
+    <div>
+  <!--    <app-radio-group></app-radio-group>-->
+      <app-radio name="1" v-model="radio" label="good">11</app-radio>
+      <app-radio name="1" v-model="radio" label="bad">22</app-radio>
+
+      <app-radio name="2" v-model="radio" label="up">11</app-radio>
+      <app-radio name="2" v-model="radio" label="down"></app-radio>
+    </div>
   </div>
 
 </template>
@@ -68,14 +77,16 @@ export default {
       //开关
       isSwitch:false,
       //下拉
-      placeholder:'hihi'
+      placeholder:'hihi',
+      //单选
+      radio:'hi'
     }
   },
   methods:{
     //测试值
     testClick:function () {
       this.placeholder='aa'
-      console.log(this.checked);
+      console.log(this.radio);
     }
   }
 }

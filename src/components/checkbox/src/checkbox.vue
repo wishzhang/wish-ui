@@ -47,7 +47,7 @@
         cursor: pointer;
 
         &.active {
-          background: $app-color-success;
+          background: $app-color-theme;
           @include border(none);
         }
       }
