@@ -31,20 +31,14 @@
       event: 'change'
     },
     props: {
-      value: String,
+      value: [String,Number,Boolean],
       placeholder: {
         type: String,
         default: '请选择'
       },
       options: {
         type: Array,
-        default: function () {
-          return [
-            {value: 'v1', label: 'l1'},
-            {value: 'v2', label: 'l2'},
-            {value: 'v3', label: 'l3'}
-          ];
-        }
+        required:true
       }
     },
     data: function () {

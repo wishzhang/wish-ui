@@ -13,13 +13,13 @@
 <script>
   export default {
     name: "AppInput",
-    inheritAttrs: true,
+    inheritAttrs: false,
     model:{
       props:'value',
       event:'input'
     },
     props:{
-      value:String
+      value:[String,Number]
     },
     computed:{
       inputListeners:function () {

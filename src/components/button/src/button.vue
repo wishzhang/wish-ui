@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="handleClick"
+    v-on="buttonListeners"
     class="app-button"
     :class="[getClass]">
     <slot>按钮</slot>
@@ -19,10 +19,8 @@
         default: 'default'
       }
     },
-
     created: function () {
     },
-
     computed: {
       getClass:function () {
           return [
@@ -31,12 +29,9 @@
               plain:this.plain||'default',
             }
           ]
-      }
-    },
-
-    methods:{
-      handleClick:function (evt) {
-        this.$emit('click',evt);
+      },
+      buttonListeners:function () {
+        return this.$listeners;
       }
     }
   };
