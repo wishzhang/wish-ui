@@ -6,10 +6,13 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'app.js'
+    filename: 'wish-ui.js',
+    library: 'wish',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     rules: [

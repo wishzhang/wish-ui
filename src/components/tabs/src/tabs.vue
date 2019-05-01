@@ -15,27 +15,36 @@
     name: "AppTabs",
     data: function () {
       return {
-        panes: []
-      }
+        panes: [],
+        curIndex: 0
+      };
     },
     created: function () {
-
     },
-    updated:function(){
-      console.log('updated')
-     // this.calcPaneInstances();
-/*      for(let i=0;i<this.panes.length;i++){
-        if(this.panes[i].$data.active){
-          this.$slots.panels=this.panes[i].$slots.default;
-        }
-      }*/
+    beforeUpdate: function () {
+      //插槽是虚拟DOM，当页面更新访问时，会重新计算。所以在更新前重新赋值
+      this.$slots.panels = this.panes[this.curIndex].$slots.default;
+    },
+    updated: function () {
     },
     mounted: function () {
-      console.log('mounted')
       this.calcPaneInstances();
+
+      let vm = this;
+      for (var i = 0; i < vm.panes.length; i++) {
+        (function (ind) {
+          vm.panes[ind].$el.onclick = function () {
+            vm.handleTabClick(vm.panes[ind], ind);
+          };
+        })(i);
+      }
+      //初始化第一个选项卡
+      if (vm.panes.length > 0) {
+        vm.handleTabClick(vm.panes[vm.curIndex], vm.curIndex);
+      }
     },
     methods: {
-      calcPaneInstances:function(){
+      calcPaneInstances: function () {
         var vm = this;
         //给直接子组件app-tab-pane添加点击事件
         if (this.$slots.default) {
@@ -46,18 +55,6 @@
           vm.panes = paneSlots.map(function (vnode) {
             return vnode.componentInstance;
           });
-
-          for (var i = 0; i < vm.panes.length; i++) {
-            (function (ind) {
-              vm.panes[ind].$el.onclick = function () {
-                vm.handleTabClick(vm.panes[ind], ind);
-              };
-            })(i);
-          }
-          //初始化第一个选项卡
-          if(vm.panes.length>0){
-            vm.handleTabClick(vm.panes[0], 0);
-          }
         }
       },
       handleTabClick: function (tab, index) {
@@ -66,14 +63,13 @@
           pane.$data.active = false;
         });
         tab.$data.active = true;
+        this.curIndex = index;
 
-        //将对应的插槽引用弄到tabs组件上
+        //将tab-pane内容移到tabs下
 
         this.$slots.panels = tab.$slots.default;
         this.$forceUpdate();
-
         this.$emit('tab-click', tab, index);
-        console.dir(tab);
       }
     }
   };
@@ -84,7 +80,8 @@
     .header {
       display: flex;
     }
-    .panels{
+
+    .panels {
 
     }
   }

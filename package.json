@@ -7,8 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --config ./webpack.component.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config ./webpack.component.js",
+    "dev:play": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build:play": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "test": "jest"
   },
   "dependencies": {

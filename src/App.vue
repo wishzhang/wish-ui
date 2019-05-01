@@ -26,7 +26,7 @@
           选项卡1内容
         </app-tab-pane>
         <app-tab-pane label="选项卡2">
-          选项卡w内容
+          <a style="background: red;" href="#">我要北汽找</a>
         </app-tab-pane>
       </app-tabs>
     </div>
