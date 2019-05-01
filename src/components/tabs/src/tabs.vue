@@ -1,52 +1,51 @@
 <template>
   <div class="app-tabs">
     <div class="header">
-      <slot></slot>
+      <tab-nav
+        :key="index"
+        :active="curIndex===index"
+        @click="handleTabClick(pane,index)"
+        v-for="(pane,index) in panes">
+        {{pane.label}}
+      </tab-nav>
     </div>
-    <div class="panels">
-      <slot name="panels"></slot>
+    <div class="content">
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-  //todo:bug tab content 区域在DOM更新后不显示
+  import TabNav from './tab-nav';
+
   export default {
     name: "AppTabs",
+    components:{
+      TabNav
+    },
     data: function () {
       return {
         panes: [],
         curIndex: 0
       };
     },
+    computed:{
+    },
     created: function () {
     },
     beforeUpdate: function () {
-      //插槽是虚拟DOM，当页面更新访问时，会重新计算。所以在更新前重新赋值
-      this.$slots.panels = this.panes[this.curIndex].$slots.default;
+      console.log('tabs beforeUpdate');
     },
     updated: function () {
+      console.log('tabs updated');
     },
     mounted: function () {
       this.calcPaneInstances();
-
-      let vm = this;
-      for (var i = 0; i < vm.panes.length; i++) {
-        (function (ind) {
-          vm.panes[ind].$el.onclick = function () {
-            vm.handleTabClick(vm.panes[ind], ind);
-          };
-        })(i);
-      }
-      //初始化第一个选项卡
-      if (vm.panes.length > 0) {
-        vm.handleTabClick(vm.panes[vm.curIndex], vm.curIndex);
-      }
+      this.panes[this.curIndex].active=true;
     },
     methods: {
       calcPaneInstances: function () {
         var vm = this;
-        //给直接子组件app-tab-pane添加点击事件
         if (this.$slots.default) {
           var paneSlots = this.$slots.default.filter(function (vnode) {
             return vnode.tag && vnode.componentOptions &&
@@ -57,19 +56,15 @@
           });
         }
       },
-      handleTabClick: function (tab, index) {
-        //切换选项卡
-        this.panes.forEach(function (pane) {
-          pane.$data.active = false;
-        });
-        tab.$data.active = true;
-        this.curIndex = index;
+      handleTabClick: function (pane, index) {
+        this.curIndex=index;
 
-        //将tab-pane内容移到tabs下
+        for(let item of this.panes){
+          item.active=false;
+        }
+        pane.active=true;
 
-        this.$slots.panels = tab.$slots.default;
-        this.$forceUpdate();
-        this.$emit('tab-click', tab, index);
+        this.$emit('tab-click', pane, index);
       }
     }
   };
@@ -81,7 +76,7 @@
       display: flex;
     }
 
-    .panels {
+    .content {
 
     }
   }

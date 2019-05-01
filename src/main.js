@@ -9,6 +9,10 @@ import Switch from './components/switch/index';
 import Select from './components/select/index';
 import RadioGroup from './components/radio-group/index';
 import Radio from './components/radio/index';
+//测试
+import List from './components/list/index';
+import Item from './components/item/index';
+import Detail from './components/detail/index';
 
 const components = [
   Button,
@@ -20,7 +24,10 @@ const components = [
   Switch,
   Select,
   RadioGroup,
-  Radio
+  Radio,
+  List,
+  Item,
+  Detail
 ];
 
 //若有Vue全局环境，则自动安装组件
@@ -45,5 +52,8 @@ export default {
   Switch,
   Select,
   RadioGroup,
-  Radio
+  Radio,
+  List,
+  Item,
+  Detail
 };

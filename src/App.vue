@@ -1,5 +1,12 @@
 <template>
   <div class="test">
+    <!--生命周期测试-->
+    <div>
+      <app-list>
+      </app-list>
+    </div>
+
+    <!--按钮-->
     <div>
       <app-button type="primary" plain active>主要按钮</app-button>
     </div>
@@ -20,12 +27,14 @@
         多选框
       </app-checkbox>
     </div>
+
+    <!--选项卡-->
     <div>
       <app-tabs>
-        <app-tab-pane label="选项卡1">
+        <app-tab-pane :label="'选项卡1'">
           选项卡1内容
         </app-tab-pane>
-        <app-tab-pane label="选项卡2">
+        <app-tab-pane :label="'选项卡2'">
           <a style="background: red;" href="#">我要北汽找</a>
         </app-tab-pane>
       </app-tabs>
