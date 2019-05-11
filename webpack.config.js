@@ -31,9 +31,9 @@ module.exports = {
             options: {
               // 多个文件时用数组的形式传入，单个文件时可以直接使用 path.resolve(__dirname, '../static/style/common.scss'
               resources: [
-                './src/assets/css/_theme-default.scss',
+                './src/assets/css/theme-default.scss',
                 './src/assets/css/common.scss',
-                './src/assets/css/_mixins.scss'
+                './src/assets/css/mixins.scss'
               ]
             }
           }

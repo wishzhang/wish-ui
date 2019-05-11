@@ -1,15 +1,25 @@
 <template>
   <div class="app-table">
     <table>
+      <!--表头-->
       <tr v-if="!hideHeader" :style="trStyleObj()">
         <th v-for="th in ths" v-if="!th.isHide">{{th.ctitle}}</th>
       </tr>
+      <!--单元格-->
       <tr
         :style="trStyleObj(tr)" v-for="(tr,trIndex) in trs" :key="tr.id">
         <td
-          v-if="!th.isHide" :key="th.id" :style="[th.colStyle,tdStyle,tdStyleObj]" v-for="(th,thIndex) in ths">
-          <template v-if="typeof tr[th.title]!=='object'">{{tr[th.title]}}</template>
-          <template v-else><span :id="th.title+th.id"></span></template>
+          v-if="!th.isHide"
+          :key="th.id"
+          :style="[th.colStyle,tdStyle,tdStyleObj]"
+          v-for="(th,thIndex) in ths">
+          <template
+            v-if="typeof tr[th.title]!=='object'">
+            {{tr[th.title]}}
+          </template>
+          <template v-else>
+            <span :id="th.title+th.id"></span>
+          </template>
         </td>
       </tr>
     </table>
@@ -44,15 +54,14 @@
       }
     },
     updated: function () {
+      console.log('tryy....')
       this.mountComponent();
     },
     mounted: function () {
       this.mountComponent();
     },
     data: function () {
-      return {
-        isAll: false
-      };
+      return {};
     },
     created: function () {
       console.log(this.trs);
@@ -93,8 +102,7 @@
     },
     computed: {
       tdStyleObj: function () {
-        return {
-        };
+        return {};
       }
     }
   };
@@ -110,26 +118,31 @@
       border-collapse: collapse;
       border-spacing: 0;
       @include border;
+
       tr {
         font-size: 0;
+
         &:hover {
-          background: rgba($app-color-theme,$app-opacity-light);
+          background: rgba($app-color-theme, $app-opacity-light);
         }
       }
     }
+
     td, th {
-      @include border($location:top);
-      @include border($location:bottom);
+      @include border($location: top);
+      @include border($location: bottom);
       text-align: center;
       padding: $app-table-td-padding-vertical $app-table-td-padding-horizontal;
       @include ellipsis;
     }
+
     th {
       padding: $app-table-th-padding-vertical $app-table-th-padding-horizontal;
       font-size: $app-fs-main;
       font-weight: bold;
       color: $app-fc-ordinary;
     }
+
     td {
       font-size: $app-fs-main;
       color: $app-fc-ordinary;

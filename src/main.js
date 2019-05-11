@@ -2,6 +2,7 @@ import './assets/css/base.scss';
 import Button from './components/button/index';
 import Input from './components/input/index';
 import Table from './components/table/index';
+import TableColumn from './components/table-column/index';
 import Checkbox from './components/checkbox/index';
 import TabPane from './components/tab-pane/index';
 import Tabs from './components/tabs/index';
@@ -18,6 +19,7 @@ const components = [
   Button,
   Input,
   Table,
+  TableColumn,
   Checkbox,
   TabPane,
   Tabs,
@@ -46,6 +48,7 @@ export default {
   Button,
   Input,
   Table,
+  TableColumn,
   Checkbox,
   TabPane,
   Tabs,

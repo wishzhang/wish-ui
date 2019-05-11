@@ -1,0 +1,102 @@
+@import "function";
+
+@mixin ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin border(
+  $location:all,
+  $width:$app-bw,
+  $style:solid,
+  $color:$app-bc-level3) {
+
+  @if $location==top {
+    border-top: $width $style $color;
+  } @else if $location==left {
+    border-left: $width $style $color;
+  } @else if $location==right {
+    border-right: $width $style $color;
+  } @else if $location==bottom {
+    border-bottom: $width $style $color;
+  } @else if $location==none {
+    border: none;
+  } @else {
+    border: $width $style $color;
+  }
+}
+
+@mixin circle($radius){
+  width:2*$radius;
+  height:2*$radius;
+  border-radius: $radius;
+}
+
+/* BEM
+ -------------------------- */
+@mixin b($block) {
+  $B: $namespace+'-'+$block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector + "." + $B + $element-separator + $unit + ","};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin
+m($modifier) {
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ","};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin pseudo($pseudo) {
+  @at-root #{&}#{':#{$pseudo}'} {
+    @content
+  }
+}
+
+
+
+

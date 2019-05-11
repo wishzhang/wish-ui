@@ -4,8 +4,14 @@ import Vue from 'vue';
 
 Vue.use(comps);
 
-new Vue({
+const abc='abvv';
+
+
+const app=new Vue({
+  abc,
   el:'#app',
   template:'<App></App>',
   components:{App}
 });
+
+debugger;

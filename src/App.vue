@@ -31,11 +31,11 @@
     <!--选项卡-->
     <div>
       <app-tabs>
-        <app-tab-pane :label="'选项卡1'">
-          选项卡1内容
+        <app-tab-pane :label="tab.tab1Name">
+          {{tab.tab1Content}}
         </app-tab-pane>
-        <app-tab-pane :label="'选项卡2'">
-          <a style="background: red;" href="#">我要北汽找</a>
+        <app-tab-pane :label="tab.tab2Name">
+          {{tab.tab2Content}}
         </app-tab-pane>
       </app-tabs>
     </div>
@@ -93,7 +93,14 @@
         ],
         placeholder: 'hihi',
         //单选
-        radio: 'hi'
+        radio: 'hi',
+        // 标签页
+        tab:{
+          tab1Name:'选项卡1',
+          tab1Content:'选项卡1内容',
+          tab2Name:'选项卡2',
+          tab2Content:'选项卡2内容',
+        }
       };
     },
     methods: {
