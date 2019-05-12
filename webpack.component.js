@@ -36,7 +36,7 @@ module.exports = {
               resources: [
                 './src/assets/css/theme-default.scss',
                 './src/assets/css/common.scss',
-                './src/assets/css/mixins.scss'
+                './src/assets/css/mixins/mixins.scss'
               ]
             }
           }

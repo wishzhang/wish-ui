@@ -5,7 +5,7 @@
       @click="headerClick"
       class="header-default-theme header">
       <span>{{title||getPlaceholder}}</span>
-      <span></span>
+      <span class="arrow" :class="triangleClass"></span>
     </div>
     <div
       v-if="isShow"
@@ -50,6 +50,11 @@
     computed: {
       getPlaceholder: function () {
         return this.placeholder;
+      },
+      triangleClass:function(){
+        return{
+          rotate180:this.isShow
+        }
       }
     },
     methods: {
@@ -84,15 +89,36 @@
       @include border;
       border-radius: $app-select-border-radius;
 
-      span:last-child {
-        position: absolute;
-        right: $app-select-padding-horizontal;
-        top: ($app-select-height - 8px) / 2;
-        width: 0;
-        height: 0;
-        border-right: 8px solid transparent;
-        border-left: 8px solid transparent;
-        border-top: 8px solid #4a5363;
+      .arrow{
+        &:after,&:before{
+          display: inline-block;
+          content:'';
+          position: absolute;
+          right: $app-select-padding-horizontal;
+          top: 0;
+          bottom:0;
+          margin:auto;
+          width: 0;
+          height: 0;
+          border-right: 5px solid transparent;
+          border-left: 5px solid transparent;
+          border-top: calc(5px) solid $app-select-triangle-color;
+          transition:transform 0.5s;
+        }
+        &:before{
+          border-top-color:white;
+          top:-2px;
+          z-index:1;
+        }
+
+        &.rotate180{
+          &:before,&:after{
+            transform: rotate(-180deg);
+          }
+          &:before{
+            top:2px;
+          }
+        }
       }
     }
 

@@ -10,3 +10,7 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
+
+play.html
+play.json
+play2.js
