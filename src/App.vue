@@ -41,7 +41,7 @@
     </div>
 
     <div>
-      <app-switch v-model="isSwitch" active-color="red" inactive-color="blue"></app-switch>
+      <app-switch v-model="isSwitch" active-color="red"></app-switch>
     </div>
 
     <div>

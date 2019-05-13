@@ -18,7 +18,10 @@
     props: {
       active: Boolean,
       activeColor: String,
-      inactiveColor: String
+      inactiveColor: {
+        type: String,
+        default: '#DCDFE6'
+      }
     },
     computed: {
       style: function () {
@@ -37,6 +40,7 @@
 
 <style scoped lang="scss">
   $app-switch-gap: 2px;
+  $time: 0.3s;
 
   .app-switch {
     position: relative;
@@ -45,37 +49,32 @@
     height: $app-switch-height;
     border-radius: $app-switch-height/2;
     cursor: pointer;
+    transition: background $time;
 
     &.active {
       background: $app-switch-active-color;
 
       span {
-        left: auto;
-        right: $app-switch-gap;
+        left: $app-switch-width - ($app-switch-height - $app-switch-gap);
       }
     }
 
     &.inactive {
       background: $app-switch-inactive-color;
-
-      span {
-        right: auto;
-        left: $app-switch-gap;
-      }
     }
 
     span {
       display: inline-block;
       position: absolute;
-      right: auto;
       left: $app-switch-gap;
       top: 0;
       bottom: 0;
       margin: auto;
       width: $app-switch-height - $app-switch-gap*2;
       height: $app-switch-height - $app-switch-gap*2;
-      border-radius:($app-switch-height - $app-switch-gap*2)/2;
+      border-radius: ($app-switch-height - $app-switch-gap*2)/2;
       background: $app-color-white;
+      transition: left $time;
     }
   }
 </style>
