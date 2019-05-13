@@ -6,6 +6,11 @@
       </app-list>
     </div>
 
+    <!--下拉框-->
+    <div>
+      <app-select :options="options" :placeholder="placeholder"></app-select>
+    </div>
+
     <!--按钮-->
     <div>
       <app-button type="primary" plain active>主要按钮</app-button>
@@ -42,10 +47,6 @@
 
     <div>
       <app-switch v-model="isSwitch" active-color="red"></app-switch>
-    </div>
-
-    <div>
-      <app-select :options="options" :placeholder="placeholder"></app-select>
     </div>
 
     <!--单选-->

@@ -2,24 +2,37 @@
   <div
     class="app-form-select">
     <div
+      :class="headerClass"
       @click="headerClick"
       class="header-default-theme header">
       <span>{{title||getPlaceholder}}</span>
       <span class="arrow" :class="triangleClass"></span>
     </div>
+
     <div
-      v-if="isShow"
       class="content">
-      <ul class="main">
-        <li
-          @click="optionClick(item)"
-          :key="index"
-          v-for="(item,index) in options"
-          class="item">
-          <span>{{item.label}}</span>
-        </li>
-      </ul>
+      <transition
+        :css="false"
+        @before-enter="contentBeforeEnter"
+        @after-enter="contentAfterEnter"
+        @enter="contentEnter"
+        @leave="contentLeave"
+        @before-leave="contentBeforeLeave"
+        @after-leave="contentAfterLeave">
+        <ul
+          v-show="!isShow"
+          class="main">
+          <li
+            @click="optionClick(item)"
+            :key="index"
+            v-for="(item,index) in options"
+            class="item">
+            <span>{{item.label}}</span>
+          </li>
+        </ul>
+      </transition>
     </div>
+
   </div>
 </template>
 
@@ -31,30 +44,36 @@
       event: 'change'
     },
     props: {
-      value: [String,Number,Boolean],
+      value: [String, Number, Boolean],
       placeholder: {
         type: String,
         default: '请选择'
       },
       options: {
         type: Array,
-        required:true
+        required: true
       }
     },
     data: function () {
       return {
         isShow: false,
-        title: ''
+        title: '',
+        isHeaderClass: true
       };
     },
     computed: {
       getPlaceholder: function () {
         return this.placeholder;
       },
-      triangleClass:function(){
-        return{
-          rotate180:this.isShow
-        }
+      triangleClass: function () {
+        return {
+          rotate180: this.isShow
+        };
+      },
+      headerClass: function () {
+        return {
+          open: this.isHeaderClass
+        };
       }
     },
     methods: {
@@ -65,12 +84,35 @@
       },
       headerClick: function () {
         this.isShow = !this.isShow;
+      },
+      contentBeforeEnter: function (el) {
+        const self=this;
+        setTimeout(function () {
+          self.isHeaderClass=false;
+        },300);
+        el.style.maxHeight = 0;
+      },
+      contentAfterEnter: function (el) {
+      },
+      contentEnter: function (el, done) {
+        el.style.transition = 'max-height 0.3s';
+      },
+      contentLeave: function (el, done) {
+        el.style.transition = 'max-height 0.3s';
+      },
+      contentBeforeLeave: function (el) {
+        el.style.maxHeight = this.options.length * 30 + 'px';
+        this.isHeaderClass=true;
+      },
+      contentAfterLeave: function (el) {
       }
     }
   };
 </script>
 
 <style scoped lang="scss">
+  $time: 0.5s;
+
   .app-form-select {
     position: relative;
     display: inline-block;
@@ -89,34 +131,44 @@
       @include border;
       border-radius: $app-select-border-radius;
 
-      .arrow{
-        &:after,&:before{
+      &.open {
+        border-radius: $app-select-border-radius $app-select-border-radius 0 0;
+      }
+
+      .arrow {
+        &:after, &:before {
           display: inline-block;
-          content:'';
+          content: '';
           position: absolute;
           right: $app-select-padding-horizontal;
           top: 0;
-          bottom:0;
-          margin:auto;
+          bottom: 0;
+          margin: auto;
           width: 0;
           height: 0;
           border-right: 5px solid transparent;
           border-left: 5px solid transparent;
           border-top: calc(5px) solid $app-select-triangle-color;
-          transition:transform 0.5s;
-        }
-        &:before{
-          border-top-color:white;
-          top:-2px;
-          z-index:1;
+          transition: transform $time;
         }
 
-        &.rotate180{
-          &:before,&:after{
+        &:before {
+          border-top-color: white;
+          top: -2px;
+          z-index: 1;
+        }
+
+        &.rotate180 {
+          &:before, &:after {
             transform: rotate(-180deg);
           }
+
           &:before{
-            top:2px;
+            top: 0px;
+          }
+
+          &:after {
+            top: -2px;
           }
         }
       }
@@ -133,7 +185,9 @@
         top: 0;
         left: 0;
         width: 100%;
-        border-radius: $app-br-big;
+        border-radius: 0 0 $app-br-big $app-br-big;
+        max-height: 0;
+        overflow: hidden;
 
         li.item {
           position: relative;
