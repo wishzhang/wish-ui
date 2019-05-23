@@ -1,5 +1,11 @@
 <template>
   <div class="test">
+
+    <!--按钮-->
+    <div>
+      <app-button @click="handleClick" type="primary" plain active>主要按钮</app-button>
+    </div>
+
     <!--生命周期测试-->
     <div>
       <app-list>
@@ -11,10 +17,7 @@
       <app-select :options="options" :placeholder="placeholder"></app-select>
     </div>
 
-    <!--按钮-->
-    <div>
-      <app-button type="primary" plain active>主要按钮</app-button>
-    </div>
+
     <div>
       <app-input
         placeholder="hihi"
@@ -45,8 +48,9 @@
       </app-tabs>
     </div>
 
+    <!--开关-->
     <div>
-      <app-switch v-model="isSwitch" active-color="red"></app-switch>
+      <app-switch v-model="isSwitch"></app-switch>
     </div>
 
     <!--单选-->
@@ -109,6 +113,16 @@
       testClick: function () {
         alert();
         console.log(this.radio);
+      },
+      handleClick:function () {
+        this.$confirm({
+          title:'这是标题',
+          subtitle:'（这是小标题）',
+          content:'这是内容',
+          confirmClick:function () {
+            console.log('点击确定');
+          }
+        })
       }
     }
   };

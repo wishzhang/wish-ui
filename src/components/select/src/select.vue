@@ -86,10 +86,10 @@
         this.isShow = !this.isShow;
       },
       contentBeforeEnter: function (el) {
-        const self=this;
+        const self = this;
         setTimeout(function () {
-          self.isHeaderClass=false;
-        },300);
+          self.isHeaderClass = false;
+        }, 300);
         el.style.maxHeight = 0;
       },
       contentAfterEnter: function (el) {
@@ -102,7 +102,7 @@
       },
       contentBeforeLeave: function (el) {
         el.style.maxHeight = this.options.length * 30 + 'px';
-        this.isHeaderClass=true;
+        this.isHeaderClass = true;
       },
       contentAfterLeave: function (el) {
       }
@@ -163,7 +163,7 @@
             transform: rotate(-180deg);
           }
 
-          &:before{
+          &:before {
             top: 0px;
           }
 

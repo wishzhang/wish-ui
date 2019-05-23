@@ -17,11 +17,8 @@
     },
     props: {
       active: Boolean,
-      activeColor: String,
-      inactiveColor: {
-        type: String,
-        default: '#DCDFE6'
-      }
+      activeColor:String,
+      inactiveColor: String
     },
     computed: {
       style: function () {

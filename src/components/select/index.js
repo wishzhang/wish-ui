@@ -1,7 +1,7 @@
-import AppSelect from './src/select';
+import Select from './src/select';
 
-AppSelect.install=function (Vue) {
-  Vue.component(AppSelect.name,AppSelect);
+Select.install=function (Vue) {
+  Vue.component(Select.name,Select);
 };
 
-export default AppSelect;
+export default Select;

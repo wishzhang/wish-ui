@@ -10,10 +10,13 @@ import Switch from './components/switch/index';
 import Select from './components/select/index';
 import RadioGroup from './components/radio-group/index';
 import Radio from './components/radio/index';
+import MessageBox from './components/message-box/index';
 //测试
 import List from './components/list/index';
 import Item from './components/item/index';
 import Detail from './components/detail/index';
+
+import 'wish-ui/src/assets/iconfont/iconfont.css';
 
 const components = [
   Button,
@@ -37,11 +40,14 @@ const install = function (Vue, opts = {}) {
   components.forEach(component => {
     Vue.component(component.name, component);
   });
+
+  Vue.prototype.$confirm=MessageBox.confirm;
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
+
 
 export default {
   install,

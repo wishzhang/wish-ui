@@ -27,7 +27,8 @@
             this.type?this.type:'',
             {
               plain:this.plain||'default',
-            }
+              active:this.active
+            },
           ]
       },
       buttonListeners:function () {

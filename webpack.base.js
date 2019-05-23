@@ -6,10 +6,8 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: './src/app.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'app.js'
+    path: path.resolve(__dirname, './dist')
   },
   module: {
     rules: [
@@ -80,25 +78,25 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test:/\.(woff|woff2|eot|ttf|otf)/,
+        use:[
+          'file-loader'
+        ]
       }
     ]
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'wish-ui':path.resolve(__dirname)
     },
     extensions: ['*', '.js', '.vue', '.json']
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true,
-    contentBase: path.resolve(__dirname, './dist')
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './index.html'),
