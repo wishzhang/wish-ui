@@ -11,6 +11,7 @@ import Select from './components/select/index';
 import RadioGroup from './components/radio-group/index';
 import Radio from './components/radio/index';
 import MessageBox from './components/message-box/index';
+import Loading from './components/loading/index';
 //测试
 import List from './components/list/index';
 import Item from './components/item/index';
@@ -32,7 +33,8 @@ const components = [
   Radio,
   List,
   Item,
-  Detail
+  Detail,
+  Loading
 ];
 
 //若有Vue全局环境，则自动安装组件
@@ -64,5 +66,6 @@ export default {
   Radio,
   List,
   Item,
-  Detail
+  Detail,
+  Loading
 };

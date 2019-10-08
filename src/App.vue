@@ -1,9 +1,13 @@
 <template>
   <div class="test">
+  <!--加载器-->
+ <!--   <div>
+      <app-loading></app-loading>
+    </div>-->
 
     <!--按钮-->
     <div>
-      <app-button @click="handleClick" type="primary" plain active>主要按钮</app-button>
+      <app-button @click="handleClick">点击显示弹框</app-button>
     </div>
 
     <!--生命周期测试-->
